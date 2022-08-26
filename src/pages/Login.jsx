@@ -44,8 +44,9 @@ class Login extends Component {
 
     return (
       <div>
-        <div>Login</div>
+        <h1>Welcome to Trybewallet</h1>
         <div className="login__box">
+          <h3>Login</h3>
           <input
             type="email"
             placeholder="email@example.com"
@@ -61,6 +62,7 @@ class Login extends Component {
             onChange={ this.handleChange }
             name="password"
             value={ password }
+            placeholder="enter your password"
           />
           <button
             type="submit"

@@ -1,0 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+.header__div {
+  background-color: springgreen;
+  display: flex;
+}
