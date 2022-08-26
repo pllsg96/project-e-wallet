@@ -1,11 +1,11 @@
-div{
-  display: flex;
+div {
   align-items: center;
-  justify-content: center;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
-.login__box{
+.login__box {
   background-color: aquamarine;
   border-radius: 5%;
   display: flex;
