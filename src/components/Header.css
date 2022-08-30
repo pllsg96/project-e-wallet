@@ -7,4 +7,5 @@
 .header__div {
   background-color: springgreen;
   display: flex;
+  width: 100%;
 }

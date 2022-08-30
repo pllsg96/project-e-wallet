@@ -69,7 +69,7 @@ class Login extends Component {
             onClick={ () => { this.handleSubmit(); } }
             disabled={ isDisabled }
           >
-            Entrar
+            Enter
           </button>
         </div>
       </div>
