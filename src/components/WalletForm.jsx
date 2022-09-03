@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './WalletForm.css';
 import { fetchExchange } from '../redux/actions';
 
@@ -11,8 +11,8 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { wallet } = this.props;
-    const { currencies } = wallet;
+    const { walletInfo } = this.props;
+    const { currencies } = walletInfo;
 
     return (
       <div>
@@ -50,7 +50,7 @@ class WalletForm extends Component {
               data-testid="currency-input"
             >
               {
-                Object.keys(currencies).map((currency) => (
+                currencies.map((currency) => (
                   <option value="currency-input" key={ currency }>
                     { currency }
                   </option>
@@ -97,8 +97,18 @@ class WalletForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  wallet: state.wallet,
-});
+const mapStateToProps = (state) => {
+  console.log(state.wallet);
+  return {
+    walletInfo: state.wallet,
+  };
+};
+
+WalletForm.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  walletInfo: PropTypes.shape({
+    currencies: PropTypes.string,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps)(WalletForm);

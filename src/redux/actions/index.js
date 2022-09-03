@@ -42,7 +42,8 @@ export const fetchExchange = () => async (dispatch) => {
 
   try {
     const response = await getExchangeValues();
-    const successAction = receiveExchangeSuccess(response);
+    const rFiltered = Object.keys(response).filter((curren) => (curren !== 'USDT'));
+    const successAction = receiveExchangeSuccess({ currencies: rFiltered });
     dispatch(successAction);
   } catch (error) {
     const errorAction = receiveExchangeFailure(error);
