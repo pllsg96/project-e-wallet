@@ -10,6 +10,11 @@ class WalletForm extends Component {
     dispatch(fetchExchange());
   }
 
+  handleSubmit = () => {
+    const { dispatch, walletInfo } = this.props;
+    console.log(walletInfo.expenses.length);
+  };
+
   render() {
     const { walletInfo } = this.props;
     const { currencies } = walletInfo;
@@ -91,6 +96,13 @@ class WalletForm extends Component {
             </select>
           </label>
           <br />
+
+          <button
+            type="button"
+            onClick={ () => this.handleSubmit() }
+          >
+            Adicionar despesa
+          </button>
         </form>
       </div>
     );
@@ -108,6 +120,7 @@ WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   walletInfo: PropTypes.shape({
     currencies: PropTypes.string,
+    expenses: PropTypes.arrayOf(),
   }).isRequired,
 };
 
