@@ -15,9 +15,15 @@ export function userInfoAction(payload) {
 
 export function walletInfoAction(payload) {
   return {
-    type: WALLET_INFO,
+    type: RECEIVE_EXCHANGE_SUCCESS,
     payload,
   };
+}
+
+export function moneySpendSum(payload) {
+  const theCurrency = payload.expenses;
+  const currencyValue = theCurrency[0].exchangeRates[theCurrency[0].currency].ask;
+  console.log(currencyValue);
 }
 
 const requestExchange = () => ({

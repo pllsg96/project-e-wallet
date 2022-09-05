@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './WalletForm.css';
-import { fetchExchange } from '../redux/actions';
+import { fetchExchange, walletInfoAction, moneySpendSum } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -27,7 +27,6 @@ class WalletForm extends Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(name, value);
     this.setState({ [name]: value });
   };
 
@@ -35,10 +34,22 @@ class WalletForm extends Component {
     const { dispatch } = this.props;
     dispatch(fetchExchange());
     const { walletInfo } = this.props;
-    // const { exchangeRates } = this.state;
     this.setState({
       exchangeRates: walletInfo.allExchangeRates,
       id: walletInfo.expenses.length,
+    }, () => {
+      console.log(this.state);
+      const x = [...walletInfo.expenses, this.state];
+      dispatch(walletInfoAction({ expenses: x }));
+      dispatch(moneySpendSum({ expenses: x }));
+    }, () => {
+      this.setState({
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'alimentacao',
+      });
     });
   };
 
