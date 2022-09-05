@@ -33,7 +33,6 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-    // console.log('ok');
     const { dispatch, history } = this.props;
     dispatch(userInfoAction(this.state));
     history.push('/carteira');

@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './WalletForm.css';
-import { fetchExchange, walletInfoAction, moneySpendSum } from '../redux/actions';
+import { fetchExchange, walletInfoAction } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
     super();
 
     this.state = {
-      id: 0,
       value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'alimentacao',
-      exchangeRates: {},
+      id: 0,
+      exchangeRates: [],
 
     };
   }
@@ -32,16 +32,16 @@ class WalletForm extends Component {
 
   handleSubmit = () => {
     const { dispatch } = this.props;
+    const { id, exchangeRates } = this.state;
+    console.log(id, exchangeRates); // PODE SER RETIRADO
     dispatch(fetchExchange());
     const { walletInfo } = this.props;
     this.setState({
       exchangeRates: walletInfo.allExchangeRates,
-      id: walletInfo.expenses.length,
+      id: (walletInfo.expenses.length + 1),
     }, () => {
-      // console.log(this.state);
       const x = [...walletInfo.expenses, this.state];
       dispatch(walletInfoAction({ expenses: x }));
-      dispatch(moneySpendSum({ expenses: x }));
     }, () => {
       this.setState({
         value: '',

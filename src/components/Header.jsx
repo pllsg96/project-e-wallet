@@ -4,6 +4,28 @@ import PropTypes from 'prop-types';
 import './Header.css';
 
 class Header extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      allSpendedMoney: 0,
+
+    };
+  }
+
+  componentDidUpdate() {
+    const { wallet: { expenses } } = this.props;
+    const { allSpendedMoney } = this.state;
+    const totalSpend = expenses.reduce((acc, atual) => {
+      const valor = parseInt(atual.value, 10);
+      const cambio = atual.exchangeRates[atual.currency].ask;
+      const cambioFloat = parseFloat(cambio);
+      const total = (cambioFloat * valor);
+      return parseFloat((acc + total).toFixed(2));
+    }, 0);
+    console.log(totalSpend);
+  }
+
   render() {
     const { user } = this.props;
     const { email } = user;
@@ -31,6 +53,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  wallet: state.wallet,
 });
 
 Header.propTypes = {
