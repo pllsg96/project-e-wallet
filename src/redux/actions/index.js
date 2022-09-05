@@ -22,8 +22,12 @@ export function walletInfoAction(payload) {
 
 export function moneySpendSum(payload) {
   const theCurrency = payload.expenses;
-  const currencyValue = theCurrency[0].exchangeRates[theCurrency[0].currency].ask;
-  console.log(currencyValue);
+  // console.log(theCurrency);
+  theCurrency.reduce((theCurr) => {
+    console.log(theCurr);
+  });
+  // const currencyValue = theCurrency[0].exchangeRates[theCurrency[0].currency].ask;
+  // console.log(currencyValue);
 }
 
 const requestExchange = () => ({

@@ -38,7 +38,7 @@ class WalletForm extends Component {
       exchangeRates: walletInfo.allExchangeRates,
       id: walletInfo.expenses.length,
     }, () => {
-      console.log(this.state);
+      // console.log(this.state);
       const x = [...walletInfo.expenses, this.state];
       dispatch(walletInfoAction({ expenses: x }));
       dispatch(moneySpendSum({ expenses: x }));
