@@ -4,18 +4,8 @@ import PropTypes from 'prop-types';
 import './Header.css';
 
 class Header extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      allSpendedMoney: 0,
-
-    };
-  }
-
-  componentDidUpdate() {
+  allSpendedMoney = () => {
     const { wallet: { expenses } } = this.props;
-    const { allSpendedMoney } = this.state;
     const totalSpend = expenses.reduce((acc, atual) => {
       const valor = parseInt(atual.value, 10);
       const cambio = atual.exchangeRates[atual.currency].ask;
@@ -23,8 +13,8 @@ class Header extends Component {
       const total = (cambioFloat * valor);
       return parseFloat((acc + total).toFixed(2));
     }, 0);
-    console.log(totalSpend);
-  }
+    return totalSpend;
+  };
 
   render() {
     const { user } = this.props;
@@ -38,9 +28,9 @@ class Header extends Component {
           { email }
         </p>
         <p data-testid="total-field">
-          Money spend:
-          {' '}
-          {' 0 '}
+          {
+            this.allSpendedMoney()
+          }
         </p>
         <p data-testid="header-currency-field">
           {' BRL '}
@@ -59,6 +49,9 @@ const mapStateToProps = (state) => ({
 Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string,
+  }).isRequired,
+  wallet: PropTypes.shape({
+    expenses: PropTypes.arrayOf(Object),
   }).isRequired,
 };
 
