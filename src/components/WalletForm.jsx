@@ -32,17 +32,34 @@ class WalletForm extends Component {
 
   handleSubmit = () => {
     const { dispatch } = this.props;
-    const { id, exchangeRates } = this.state;
-    console.log(id, exchangeRates); // PODE SER RETIRADO
     dispatch(fetchExchange());
     const { walletInfo } = this.props;
     this.setState({
       exchangeRates: walletInfo.allExchangeRates,
-      id: (walletInfo.expenses.length + 1),
+      id: (walletInfo.expenses.length),
     }, () => {
-      const x = [...walletInfo.expenses, this.state];
+      const {
+        id,
+        exchangeRates,
+        value,
+        description,
+        currency,
+        method,
+        tag } = this.state;
+      console.log(exchangeRates);
+      const objetoDasKeys = {
+        id,
+        exchangeRates,
+        value,
+        description,
+        currency,
+        method,
+        tag,
+      };
+      const x = [...walletInfo.expenses, objetoDasKeys];
+      console.log(x);
       dispatch(walletInfoAction({ expenses: x }));
-    }, () => {
+
       this.setState({
         value: '',
         description: '',
@@ -129,9 +146,9 @@ class WalletForm extends Component {
               onChange={ this.handleChange }
               value={ method }
             >
-              <option value="dinheiro">Dinheiro</option>
-              <option value="cartao-de-credito">Cartão de crédito</option>
-              <option value="cartao-de-debito">Cartão de débito</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de crédito">Cartão de crédito</option>
+              <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
           <br />
@@ -146,11 +163,11 @@ class WalletForm extends Component {
               onChange={ this.handleChange }
               value={ tag }
             >
-              <option value="alimentacao">Alimentação</option>
-              <option value="lazer">Lazer</option>
-              <option value="trabalho">Trabalho</option>
-              <option value="transporte">Transporte</option>
-              <option value="saude">Saúde</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
             </select>
           </label>
           <br />

@@ -43,17 +43,17 @@ export const fetchExchange = () => async (dispatch) => {
   try {
     const response = await getExchangeValues();
     const rFiltered = Object.keys(response).filter((curren) => (curren !== 'USDT'));
-    const allExchangeRates = Object.entries(response).reduce((newObj, [acc, att]) => ({
-      ...newObj,
-      [acc]: ({
-        code: att.code,
-        name: att.name,
-        ask: att.ask,
-      }),
-    }), {});
+    // const allExchangeRates = Object.entries(response).reduce((newObj, [acc, att]) => ({
+    //   ...newObj,
+    //   [acc]: ({
+    //     code: att.code,
+    //     name: att.name,
+    //     ask: att.ask,
+    //   }),
+    // }), {});
     const successAction = receiveExchangeSuccess({
       currencies: rFiltered,
-      allExchangeRates,
+      allExchangeRates: response,
     });
     dispatch(successAction);
   } catch (error) {
