@@ -32,7 +32,6 @@ class Table extends Component {
                 <td>{x.method}</td>
                 <td>{parseFloat(x.value).toFixed(2)}</td>
                 <td>{x.exchangeRates[x.currency].name}</td>
-                <td>{x.currency}</td>
                 <td>
                   {
                     parseFloat(x.exchangeRates[x.currency].ask).toFixed(2)
