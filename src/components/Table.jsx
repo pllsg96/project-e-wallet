@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import './Table.css';
 
 class Table extends Component {
+  handleDelete = ({ target: { value } }) => {
+    const { dispatch, expenses } = this.props;
+    console.log(expenses.filter((expe) => (
+      expe.id === parseInt(value, 10)
+    )));
+  };
+
   render() {
     const { expenses } = this.props;
 
@@ -46,7 +53,13 @@ class Table extends Component {
 
                 <td>
                   <button type="button">Editar</button>
-                  <button type="button">Excluir</button>
+                  <button
+                    type="button"
+                    value={ x.id }
+                    onClick={ (event) => (this.handleDelete(event)) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))
