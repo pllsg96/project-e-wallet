@@ -6,4 +6,5 @@
 div {
   background-color: rgb(184, 225, 204);
   display: flex;
+  padding: 4px;
 }

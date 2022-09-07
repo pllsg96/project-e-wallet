@@ -97,7 +97,6 @@ class WalletForm extends Component {
               value={ value }
             />
           </label>
-          <br />
 
           <label htmlFor="description">
             Descrição:
@@ -110,7 +109,6 @@ class WalletForm extends Component {
               value={ description }
             />
           </label>
-          <br />
 
           <label htmlFor="currency-input">
             Moeda:
@@ -134,7 +132,6 @@ class WalletForm extends Component {
               }
             </select>
           </label>
-          <br />
 
           <label htmlFor="method">
             Método de pagamento:
@@ -151,7 +148,6 @@ class WalletForm extends Component {
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
-          <br />
 
           <label htmlFor="tag">
             Categoria:
@@ -170,7 +166,6 @@ class WalletForm extends Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <br />
 
           <button
             type="button"
