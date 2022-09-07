@@ -8,8 +8,8 @@ class Table extends Component {
     const { expenses } = this.props;
 
     return (
-      <div>
-        <table>
+      <table>
+        <thead>
           <tr>
             <th>Descrição</th>
             <th>Tag</th>
@@ -19,16 +19,19 @@ class Table extends Component {
             <th>Câmbio utilizado</th>
             <th>Valor convertido</th>
             <th>Moeda de conversão</th>
-            <th><button type="button">Editar/Excluir</button></th>
+            <th>Editar/Excluir</th>
           </tr>
+        </thead>
 
+        <tbody>
           {
             expenses.map((x) => (
               <tr key={ x.id }>
                 <td>{x.description}</td>
                 <td>{x.tag}</td>
                 <td>{x.method}</td>
-                <td>{x.value}</td>
+                <td>{parseFloat(x.value).toFixed(2)}</td>
+                <td>{x.exchangeRates[x.currency].name}</td>
                 <td>{x.currency}</td>
                 <td>
                   {
@@ -42,26 +45,35 @@ class Table extends Component {
                 </td>
                 <td>Real</td>
 
+                <td>
+                  <button type="button">Editar</button>
+                  <button type="button">Excluir</button>
+                </td>
               </tr>
             ))
           }
-        </table>
-      </div>
+        </tbody>
+      </table>
     );
   }
 }
 
 const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
 
+// Table.propTypes = {
+//   expenses: PropTypes.shape({
+//     id: PropTypes.number,
+//     description: PropTypes.string,
+//     tag: PropTypes.string,
+//     method: PropTypes.string,
+//     value: PropTypes.number,
+//     currency: PropTypes.string,
+//     exchangeRates: PropTypes.arrayOf({}),
+//   }).isRequired,
+// };
+
 Table.propTypes = {
-  expenses: PropTypes.shape({
-    id: PropTypes.number,
-    description: PropTypes.string,
-    method: PropTypes.string,
-    value: PropTypes.number,
-    currency: PropTypes.string,
-    exchangeRates: PropTypes.arrayOf({}),
-  }).isRequired,
+  expenses: PropTypes.isRequired,
 };
 
 export default connect(mapStateToProps)(Table);
