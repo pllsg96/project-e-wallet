@@ -9,7 +9,7 @@ class WalletForm extends Component {
     super();
 
     this.state = {
-      value: '',
+      value: 0.00,
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
@@ -61,7 +61,7 @@ class WalletForm extends Component {
       dispatch(walletInfoAction({ expenses: x }));
 
       this.setState({
-        value: '',
+        value: 0.00,
         description: '',
         currency: 'USD',
         method: 'Dinheiro',

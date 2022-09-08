@@ -13,7 +13,8 @@ class Header extends Component {
       const total = (cambioFloat * valor);
       return parseFloat((acc + total).toFixed(2));
     }, 0);
-    return totalSpend;
+    if (totalSpend !== 0.00) return totalSpend;
+    return 0.00;
   };
 
   render() {
@@ -29,7 +30,7 @@ class Header extends Component {
         </p>
         <p data-testid="total-field">
           {
-            this.allSpendedMoney()
+            (this.allSpendedMoney()).toFixed(2)
           }
         </p>
         <p data-testid="header-currency-field">

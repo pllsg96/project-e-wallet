@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { walletInfoAction } from '../redux/actions';
 import './Table.css';
 
 class Table extends Component {
   handleDelete = ({ target: { value } }) => {
-    const { dispatch, expenses } = this.props;
-    console.log(expenses.filter((expe) => (
-      expe.id === parseInt(value, 10)
+    const { dispatch, wallet } = this.props;
+    const filtro = (wallet.expenses.filter((expe) => (
+      expe.id !== parseInt(value, 10)
     )));
+    dispatch(walletInfoAction({ expenses: filtro }));
   };
 
   render() {
-    const { expenses } = this.props;
+    const { wallet } = this.props;
+    const { expenses } = wallet;
 
     return (
       <table>
@@ -56,6 +59,7 @@ class Table extends Component {
                   <button
                     type="button"
                     value={ x.id }
+                    data-testid="delete-btn"
                     onClick={ (event) => (this.handleDelete(event)) }
                   >
                     Excluir
@@ -70,7 +74,7 @@ class Table extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
+const mapStateToProps = (state) => ({ wallet: state.wallet });
 
 // Table.propTypes = {
 //   expenses: PropTypes.shape({
@@ -85,7 +89,8 @@ const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
 // };
 
 Table.propTypes = {
-  expenses: PropTypes.isRequired,
+  wallet: PropTypes.isRequired,
+  dispatch: PropTypes.isRequired,
 };
 
 export default connect(mapStateToProps)(Table);
