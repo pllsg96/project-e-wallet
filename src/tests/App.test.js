@@ -2,6 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWith';
 import Login from '../pages/Login';
+import userEvent from '@testing-library/user-event';
 
 describe('Testando página de login Login.jsx', () => {
   test('Verifica se existe um h1', () => {
