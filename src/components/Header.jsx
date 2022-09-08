@@ -22,7 +22,7 @@ class Header extends Component {
     const { email } = user;
     return (
       <div className="header__div">
-        <h2>Header</h2>
+        {/* <h2>Header</h2> */}
         <p data-testid="email-field">
           Logged as:
           {' '}
