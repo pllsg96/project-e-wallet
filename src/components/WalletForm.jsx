@@ -9,7 +9,7 @@ class WalletForm extends Component {
     super();
 
     this.state = {
-      value: 0.00,
+      value: '',
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
