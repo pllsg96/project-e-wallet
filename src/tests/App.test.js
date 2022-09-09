@@ -78,4 +78,18 @@ describe('Testando página de WalletForm WalletForm.jsx', () => {
     const inputDescription = screen.getByTestId('description-input');
     expect(inputDescription).toBeInTheDocument();
   });
+
+  test('Se preenchendo tudo e clicando no adicionar, aparece', () => {
+    renderWithRouterAndRedux(<Wallet />);
+    const inputValue = screen.getByTestId('value-input');
+    const inputDescription = screen.getByTestId('description-input');
+    const buttonDespesa = screen.getByRole('button', { name: 'buttonAdd' });
+
+    userEvent.type(inputValue, '2');
+    userEvent.type(inputDescription, 'abc');
+    userEvent.click(buttonDespesa);
+
+    expect(2).toBeInTheDocument();
+    expect(abc).toBeInTheDocument();
+  });
 });

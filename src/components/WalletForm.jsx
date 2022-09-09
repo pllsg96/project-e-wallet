@@ -169,6 +169,7 @@ class WalletForm extends Component {
 
           <button
             type="button"
+            name="buttonAdd"
             onClick={ () => this.handleSubmit() }
           >
             Adicionar despesa
