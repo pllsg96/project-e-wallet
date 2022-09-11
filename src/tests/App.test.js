@@ -5,6 +5,7 @@ import renderWithRouterAndRedux from './helpers/renderWith';
 import Login from '../pages/Login';
 import Wallet from '../pages/Wallet';
 
+// ---*---*---*---*---*---*---*---*---*---*---*---*---*---*---* //
 describe('Testando página de login Login.jsx', () => {
   test('Verifica se existe um h1', () => {
     renderWithRouterAndRedux(<Login />);
@@ -54,6 +55,7 @@ describe('Testando página de login Login.jsx', () => {
   });
 });
 
+// ---*---*---*---*---*---*---*---*---*---*---*---*---*---*---* //
 describe('Testando página de Wallet Wallet.jsx', () => {
   test('Se existe um texto loggedas', () => {
     renderWithRouterAndRedux(<Wallet />);
@@ -69,27 +71,35 @@ describe('Testando página de Wallet Wallet.jsx', () => {
   });
 });
 
+// ---*---*---*---*---*---*---*---*---*---*---*---*---*---*---* //
 describe('Testando página de WalletForm WalletForm.jsx', () => {
   test('Teste a existencia das inputs', () => {
     renderWithRouterAndRedux(<Wallet />);
     const inputValue = screen.getByTestId('value-input');
     expect(inputValue).toBeInTheDocument();
+    userEvent.type(inputValue, '1');
 
     const inputDescription = screen.getByTestId('description-input');
     expect(inputDescription).toBeInTheDocument();
-  });
+    userEvent.type(inputDescription, 'first test');
 
-  test('Se preenchendo tudo e clicando no adicionar, aparece', () => {
-    renderWithRouterAndRedux(<Wallet />);
-    const inputValue = screen.getByTestId('value-input');
-    const inputDescription = screen.getByTestId('description-input');
-    const buttonDespesa = screen.getByRole('button', { name: 'buttonAdd' });
+    const inputCurrency = screen.getByTestId('currency-input');
+    expect(inputCurrency).toBeInTheDocument();
+    userEvent.type(inputCurrency, 'USD');
 
-    userEvent.type(inputValue, '2');
-    userEvent.type(inputDescription, 'abc');
+    const inputMethod = screen.getByTestId('method-input');
+    expect(inputMethod).toBeInTheDocument();
+    userEvent.type(inputMethod, 'Dinheiro');
+
+    const inputTag = screen.getByTestId('tag-input');
+    expect(inputTag).toBeInTheDocument();
+    userEvent.type(inputTag, 'Lazer');
+
+    const buttonDespesa = screen.getByText('Adicionar despesa');
+    expect(buttonDespesa).toBeInTheDocument();
+
     userEvent.click(buttonDespesa);
-
-    expect(2).toBeInTheDocument();
-    expect(abc).toBeInTheDocument();
+    const texto = screen.getByText('first test');
+    expect(texto).toBeInTheDocument();
   });
 });
